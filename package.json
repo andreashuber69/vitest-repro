@@ -1,0 +1,31 @@
+{
+  "name": "vitest-repro",
+  "version": "1.0.0",
+  "description": "Reproduces a bug in vitest",
+  "keywords": [
+    "vitest",
+    "bug",
+    "repro"
+  ],
+  "homepage": "https://github.com/andreashuber69/vitest-repro#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andreashuber69/vitest-repro.git"
+  },
+  "bugs": {
+    "url": "https://github.com/andreashuber69/vitest-repro/issues"
+  },
+  "license": "Unlicense",
+  "author": {
+    "name": "Andreas Huber"
+  },
+  "engines": {
+    "node": ">=18.18"
+  },
+  "type": "module",
+  "main": "dist/index.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
