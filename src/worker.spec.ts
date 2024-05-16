@@ -4,15 +4,28 @@ import Worker from "web-worker";
 
 const bounce = async (worker: Worker, val: boolean) => {
     let currentResolve: ((value: boolean) => void) | undefined;
+    let currentReject: ((err: unknown) => void) | undefined;
 
-    const handler = (ev: MessageEvent<boolean>) => {
+    const onMessage = (ev: MessageEvent<boolean>) => {
         currentResolve?.(ev.data);
-        worker.removeEventListener("message", handler);
+        remove();
     }
 
-    return await new Promise<boolean>((resolve) => {
+    const onError = (err: unknown) => {
+        currentReject?.(err);
+        remove();
+    }
+
+    const remove = () => {
+        worker.removeEventListener("message", onMessage);
+        worker.removeEventListener("error", onError);
+    }
+
+    return await new Promise<boolean>((resolve, reject) => {
         currentResolve = resolve;
-        worker.addEventListener("message", handler);
+        currentReject = reject;
+        worker.addEventListener("message", onMessage);
+        worker.addEventListener("error", onError);
         worker.postMessage(val);
     });
 }
