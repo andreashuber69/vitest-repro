@@ -8,12 +8,12 @@ const bounce = async (worker: Worker, value: boolean) => {
     const onMessage = (message: boolean) => {
         remove();
         currentResolve?.(message);
-    }
+    };
 
     const onError = (err: Error) => {
         remove();
         currentReject?.(err);
-    }
+    };
 
     const remove = () => {
         worker.removeListener("message", onMessage);
@@ -24,7 +24,7 @@ const bounce = async (worker: Worker, value: boolean) => {
         currentResolve = resolve;
         currentReject = reject;
         worker.addListener("message", onMessage);
-        worker.addListener("error", onError)
+        worker.addListener("error", onError);
         worker.postMessage(value);
     });
 }
