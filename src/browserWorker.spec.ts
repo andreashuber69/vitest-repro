@@ -18,7 +18,7 @@ const bounce = async (worker: Worker, val: boolean) => {
 
 describe("Worker", () => {
     it("should bounce back", async () => {
-        const worker = new Worker(new URL("worker.js", import.meta.url), { type: "module" });
+        const worker = new Worker(new URL("browserWorker.js", import.meta.url), { type: "module" });
         expect(await bounce(worker, true)).toBe(true);
         expect(await bounce(worker, false)).toBe(false);
     });
