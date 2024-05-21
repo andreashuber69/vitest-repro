@@ -27,7 +27,7 @@
   "private": true,
   "scripts": {
     "build": "tsc -p '.'",
-    "test-browser": "vitest --run --coverage --browser chrome"
+    "test-browser": "vitest --run --browser chrome"
   },
   "devDependencies": {
     "@tsconfig/node-lts": "^20.1.3",
@@ -36,7 +36,6 @@
     "@vitest/coverage-istanbul": "^1.5.0",
     "typescript": "^5.4.5",
     "vitest": "^1.5.0",
-    "web-worker": "^1.3.0",
     "webdriverio": "^8.36.1"
   }
 }
