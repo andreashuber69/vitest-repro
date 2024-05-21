@@ -27,7 +27,9 @@
   "private": true,
   "scripts": {
     "build": "tsc -p '.'",
-    "test-browser": "vitest --run --browser chrome"
+    "test-browser": "vitest ./src/browserWorker.spec.ts --run --browser chrome",
+    "test-node-ts": "vitest ./src/nodeWorker.spec.ts --run",
+    "test-node-js": "npm run build && vitest ./dist/nodeWorker.spec.js --run"
   },
   "devDependencies": {
     "@tsconfig/node-lts": "^20.1.3",
