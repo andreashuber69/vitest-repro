@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-const bounce = async (worker: Worker, val: boolean) => {
+const bounce = async (worker: Worker, value: boolean) => {
     let currentResolve: (value: boolean) => void;
     let currentReject: (reason?: unknown) => void;
 
@@ -24,7 +24,7 @@ const bounce = async (worker: Worker, val: boolean) => {
         currentReject = reject;
         worker.addEventListener("message", onMessage);
         worker.addEventListener("error", onError);
-        worker.postMessage(val);
+        worker.postMessage(value);
     });
 }
 
