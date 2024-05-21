@@ -1,4 +1,3 @@
-// https://github.com/andreashuber69/kiss-worker/blob/develop/README.md
 import { describe, expect, it } from "vitest";
 
 const bounce = async (worker: Worker, val: boolean) => {
