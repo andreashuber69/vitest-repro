@@ -1,16 +1,29 @@
 import { describe, expect, it } from "vitest";
 
 const bounce = async (worker: Worker, val: boolean) => {
-    let currentResolve: ((value: boolean) => void) | undefined;
+    let currentResolve: (value: boolean) => void;
+    let currentReject: (reason?: unknown) => void;
 
-    const onMessage = (ev: MessageEvent<boolean>) => {
-        currentResolve?.(ev.data);
+    const onMessage = (message: MessageEvent<boolean>) => {
+        remove();
+        currentResolve?.(message.data);
+    };
+
+    const onError = (err: ErrorEvent) => {
+        remove();
+        currentReject?.(err);
+    };
+
+    const remove = () => {
         worker.removeEventListener("message", onMessage);
-    }
+        worker.removeEventListener("error", onError);
+    };
 
-    return await new Promise<boolean>((resolve) => {
+    return await new Promise<boolean>((resolve, reject) => {
         currentResolve = resolve;
+        currentReject = reject;
         worker.addEventListener("message", onMessage);
+        worker.addEventListener("error", onError);
         worker.postMessage(val);
     });
 }
