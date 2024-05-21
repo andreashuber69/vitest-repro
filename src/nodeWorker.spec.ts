@@ -7,12 +7,12 @@ const bounce = async (worker: Worker, value: boolean) => {
 
     const onMessage = (message: boolean) => {
         remove();
-        currentResolve?.(message);
+        currentResolve(message);
     };
 
     const onError = (err: Error) => {
         remove();
-        currentReject?.(err);
+        currentReject(err);
     };
 
     const remove = () => {

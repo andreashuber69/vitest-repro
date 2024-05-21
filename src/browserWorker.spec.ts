@@ -6,12 +6,12 @@ const bounce = async (worker: Worker, value: boolean) => {
 
     const onMessage = (message: MessageEvent<boolean>) => {
         remove();
-        currentResolve?.(message.data);
+        currentResolve(message.data);
     };
 
     const onError = (err: ErrorEvent) => {
         remove();
-        currentReject?.(err);
+        currentReject(err);
     };
 
     const remove = () => {
