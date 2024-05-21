@@ -1,4 +1,1 @@
-onmessage = async (ev: MessageEvent<boolean>) => {
-    postMessage(ev.data);
-}
-
+onmessage = (ev: MessageEvent<boolean>) => postMessage(ev.data);
