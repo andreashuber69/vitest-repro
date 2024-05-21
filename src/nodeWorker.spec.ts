@@ -32,6 +32,7 @@ const bounce = async (worker: Worker, value: boolean) => {
 describe("Worker", () => {
     it("should bounce back", async () => {
         const worker = new Worker(new URL("nodeWorker.js", import.meta.url));
+        // const worker = new Worker(new URL("nodeWorker.ts", import.meta.url), { execArgv: ["--import", "./node_modules/tsx/dist/cli.mjs"] });
         expect(await bounce(worker, true)).toBe(true);
         expect(await bounce(worker, false)).toBe(false);
     });
