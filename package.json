@@ -25,9 +25,8 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "test-browser": "vitest ./src/browserWorker.spec.ts --run --browser chrome",
-    "test-node-ts": "vitest ./src/nodeWorker.spec.ts --run",
-    "test-node-js": "tsc -p '.' && vitest ./dist/nodeWorker.spec.js --run"
+    "test-browser": "tsc && vitest ./src/browserWorker.spec.ts --run --browser chrome",
+    "test-node": "tsc && vitest ./src/nodeWorker.spec.ts --run"
   },
   "devDependencies": {
     "@tsconfig/node-lts": "^20.1.3",

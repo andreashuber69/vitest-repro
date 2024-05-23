@@ -5,7 +5,7 @@
   ],
   "compilerOptions": {
     "lib": ["es2023", "WebWorker"],
-    "outDir": "dist"
+    "noEmit": true
   },
   "include": [
     "src/*.ts"
