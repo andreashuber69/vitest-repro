@@ -1,4 +1,4 @@
-import { Worker } from "node:worker_threads";
+import { Worker, WorkerOptions } from "node:worker_threads";
 import { describe, expect, it } from "vitest";
 
 const bounce = async (worker: Worker, value: boolean) => {
@@ -29,10 +29,17 @@ const bounce = async (worker: Worker, value: boolean) => {
     });
 }
 
+class TsWorker extends Worker {
+	constructor(filename: string | URL, options: WorkerOptions = {}) {
+		options.workerData ??= {};
+		options.workerData.__ts_worker_filename = filename.toString();
+		super(new URL("./worker.mjs", import.meta.url), options);
+	}
+}
+
 describe("Worker", () => {
     it("should bounce back", async () => {
-        const worker = new Worker(new URL("nodeWorker.js", import.meta.url));
-        // const worker = new Worker(new URL("nodeWorker.ts", import.meta.url), { execArgv: ["--import", "./node_modules/tsx/dist/cli.mjs"] });
+        const worker = new TsWorker(new URL("nodeWorker.ts", import.meta.url));
         expect(await bounce(worker, true)).toBe(true);
         expect(await bounce(worker, false)).toBe(false);
     });
